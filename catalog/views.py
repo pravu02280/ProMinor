@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-from .models import Book, Author, BookInstance, Genre 
-from .forms import LeaveForm
+from .models import Book, Author, BookInstance, Genre
+from .forms import LeaveForm, ProgressForm
 
 
 def index(request):
@@ -21,14 +21,15 @@ def index(request):
 
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
+    request.session['num_visits'] = num_visits + 1
 
     # Render the HTML template index.html with the data in the context variable.
     return render(
         request,
         'index.html',
-        context={'num_books': num_books, 'num_instances': num_instances, 'num_instances_available': num_instances_available, 'num_authors': num_authors,
-            'num_visits': num_visits},
+        context={'num_books': num_books, 'num_instances': num_instances,
+                 'num_instances_available': num_instances_available, 'num_authors': num_authors,
+                 'num_visits': num_visits},
     )
 
 
@@ -199,3 +200,25 @@ def leaveformview(request):
         form = LeaveForm()
 
     return render(request, 'name.html', {'form': form})
+
+
+def progressformview(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+
+        form = ProgressForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            progress = form.save(commit=False)
+            progress.user = request.user
+            progress.save()
+            return HttpResponseRedirect('/catalog/progressview/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProgressForm()
+
+    return render(request, 'nameone.html', {'form': form})

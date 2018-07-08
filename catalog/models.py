@@ -11,9 +11,19 @@ class Leave(models.Model):
         max_length=200, help_text="Enter a leave form")
     description = models.CharField(
         max_length=200)
-    user= models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE)
-    approve=models.BooleanField(default=False)
+    approve = models.BooleanField(default=False)
+
+
+class Progress(models.Model):
+    subject = models.CharField(
+        max_length=200, help_text="Enter a progress form")
+    description = models.CharField(
+        max_length=200)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+
 
 class Genre(models.Model):
     """
@@ -54,7 +64,8 @@ class Book(models.Model):
     summary = models.TextField(
         max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField(
-        'ISBN', max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
+        'ISBN', max_length=13,
+        help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     genre = models.ManyToManyField(
         Genre, help_text="Select a genre for this book")
     # ManyToManyField used because a genre can contain many books and a Book can cover many genres.

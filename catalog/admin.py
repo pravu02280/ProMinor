@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Author, Genre, Book, BookInstance, Language, Department,  Employee, Leave
+from .models import Author, Genre, Book, BookInstance, Language, Department,  Employee, Leave,Progress
 
 """
 # Minimal registration of Models.
@@ -18,6 +18,7 @@ admin.site.register(Language)
 admin.site.register(Employee)
 admin.site.register(Department)
 admin.site.register(Leave)
+admin.site.register(Progress)
 
 
 class BooksInline(admin.TabularInline):

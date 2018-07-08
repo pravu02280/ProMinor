@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 import datetime  # for checking renewal date range.
 
 from django import forms
-from .models import Leave
+from .models import Leave, Progress
 
 
 class RenewBookForm(forms.Form):
@@ -31,4 +31,10 @@ class RenewBookForm(forms.Form):
 class LeaveForm(forms.ModelForm):
     class Meta:
         model = Leave
+        fields = ['subject', 'description']
+
+
+class ProgressForm(forms.ModelForm):
+    class Meta:
+        model = Progress
         fields = ['subject', 'description']
