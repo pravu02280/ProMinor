@@ -1,38 +1,81 @@
 {% extends "base_generic.html" %}
-
 {% block content %}
+{% load static %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+<script src="{% static 'js/jquery-3.3.7.min.js' %}"></script>
+<style>
+  .content {
+    display: none;
+  }
 
-{% if next %}
+  .preload {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    margin-right: -10%;
+    transform: translate(-10%, -10%);
+  }
+
+  body {
+    background: #2c2b2b !important;
+    color: antiquewhite !important;
+  }
+
+  /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+
+
+
+
+
+</style>
+<div class="preload">
+    <img src="{% static 'images/fluid-loader.gif' %}"/>
+</div>
+<div class="content" align="center">
+
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
     {% if user.is_authenticated %}
     <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+        please login with an account that has access.</p>
     {% else %}
     <p>Please login to see this page.</p>
     {% endif %}
-{% endif %}
+    {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+        <input type="submit" value="login"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <script>
+  $(function () {
+    $(".preload").fadeOut(6000, function () {
+      $(".content").fadeIn(1000);
+    });
+  });
 
-{% endblock %}
+
+
+
+
+    </script>
+    {% endblock %}

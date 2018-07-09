@@ -2,6 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import datetime
+from django.contrib.auth.decorators import permission_required
+
+from .forms import RenewBookForm
 
 from .models import Book, Author, BookInstance, Genre
 from .forms import LeaveForm, ProgressForm
@@ -96,15 +103,6 @@ class LoanedBooksAllListView(PermissionRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return BookInstance.objects.filter(status__exact='o').order_by('due_back')
-
-
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-import datetime
-from django.contrib.auth.decorators import permission_required
-
-from .forms import RenewBookForm
 
 
 @permission_required('catalog.can_mark_returned')

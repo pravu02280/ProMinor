@@ -1,4 +1,4 @@
-"""locallibrary URL Configuration
+"""employeeManagement URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from boards import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('polls/', include('polls.urls')),
+    path('boards/', views.home, name='home'),
     path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
 ]
@@ -52,5 +56,6 @@ urlpatterns += [
 
 # Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-]
+                   path('accounts/', include('django.contrib.auth.urls')), ] \
+               + static(settings.STATIC_URL,
+                        document_root=settings.STATIC_ROOT)
