@@ -2,18 +2,14 @@ from django.urls import path, include
 
 from . import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('books/', views.BookListView.as_view(), name='books'),
-    path('leaveform/', views.leaveformview, name='leaveformview'),
-    path('progressform/', views.progressformview, name='progressformview'),
 
     path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
 ]
-
 
 urlpatterns += [
     path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
@@ -21,13 +17,11 @@ urlpatterns += [
          name='all-borrowed'),  # Added for challenge
 ]
 
-
 # Add URLConf for librarian to renew a book.
 urlpatterns += [
     path('book/<uuid:pk>/renew/', views.renew_book_librarian,
          name='renew-book-librarian'),
 ]
-
 
 # Add URLConf to create, update, and delete authors
 urlpatterns += [

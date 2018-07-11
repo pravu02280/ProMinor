@@ -15,14 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from boards import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    path('polls/', include('polls.urls')),
-    path('boards/', views.home, name='home'),
     path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
 ]
@@ -34,11 +31,10 @@ from django.contrib import admin
 from django.urls import include
 
 urlpatterns += [
-    path('admin/', admin.site.urls),
-]
-
-urlpatterns += [
     path('catalog/', include('catalog.urls')),
+    path('report/', include('report.urls')),
+    path('events/', include('events.urls')),
+
 ]
 
 # Use static() to add url mapping to serve static files during development (only)

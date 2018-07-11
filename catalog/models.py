@@ -6,25 +6,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-class Leave(models.Model):
-    subject = models.CharField(
-        max_length=200, help_text="Enter a leave form")
-    description = models.CharField(
-        max_length=200)
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE)
-    approve = models.BooleanField(default=False)
-
-
-class Progress(models.Model):
-    subject = models.CharField(
-        max_length=200, help_text="Enter a progress form")
-    description = models.CharField(
-        max_length=200)
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE)
-
-
 class Genre(models.Model):
     """
     Model representing a book genre (e.g. Science Fiction, Non Fiction).
@@ -151,8 +132,8 @@ class BookInstance(models.Model):
         return False
 
     LOAN_STATUS = (
-        ('d', 'Maintenance'),
-        ('o', 'On loan'),
+        ('d', 'paid'),
+        ('o', 'Unpaid'),
         ('a', 'Available'),
         ('r', 'Reserved'),
     )

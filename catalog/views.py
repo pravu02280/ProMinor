@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import permission_required
 from .forms import RenewBookForm
 
 from .models import Book, Author, BookInstance, Genre
-from .forms import LeaveForm, ProgressForm
 
 
 def index(request):
@@ -176,47 +175,3 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
     model = Book
     success_url = reverse_lazy('books')
     permission_required = 'catalog.can_mark_returned'
-
-
-def leaveformview(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-
-        form = LeaveForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            leave = form.save(commit=False)
-            leave.user = request.user
-            leave.save()
-            return HttpResponseRedirect('/catalog/leaveform/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = LeaveForm()
-
-    return render(request, 'name.html', {'form': form})
-
-
-def progressformview(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-
-        form = ProgressForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            progress = form.save(commit=False)
-            progress.user = request.user
-            progress.save()
-            return HttpResponseRedirect('/catalog/progressview/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = ProgressForm()
-
-    return render(request, 'nameone.html', {'form': form})
