@@ -13,4 +13,4 @@ class Attendence(models.Model):
         """
         String for representing the Model object (in Admin site etc.)
         """
-        return self.subject
+        return self.user.username

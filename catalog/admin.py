@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Author, Genre, Book, BookInstance, Language, Department, Employee
+from .models import Author, Genre, Book, BookInstance, Language, Department, Employee,SalaryInstance
 
 """
 # Minimal registration of Models.
@@ -15,8 +15,10 @@ admin.site.register(Language)
 
 admin.site.register(Genre)
 admin.site.register(Language)
-admin.site.register(Employee)
+# admin.site.register(Employee)
 admin.site.register(Department)
+# admin.site.register(SalaryInstance)
+
 
 
 class BooksInline(admin.TabularInline):
@@ -29,7 +31,7 @@ class BooksInline(admin.TabularInline):
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     """
-    Administration object for Author models. 
+    Administration object for Author models.
     Defines:
      - fields to be displayed in list view (list_display)
      - orders fields in detail view (fields), grouping the date fields horizontally
@@ -49,7 +51,7 @@ class BooksInstanceInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     """
-    Administration object for Book models. 
+    Administration object for Book models.
     Defines:
      - fields to be displayed in list view (list_display)
      - adds inline addition of book instances in book view (inlines)
@@ -58,26 +60,88 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [BooksInstanceInline]
 
 
-admin.site.register(Book, BookAdmin)
+# admin.site.register(Book, BookAdmin)
 
-
-@admin.register(BookInstance)
-class BookInstanceAdmin(admin.ModelAdmin):
+#
+# @admin.register(BookInstance)
+# class BookInstanceAdmin(admin.ModelAdmin):
+#     """
+#     Administration object for BookInstance models.
+#     Defines:
+#      - fields to be displayed in list view (list_display)
+#      - filters that will be displayed in sidebar (list_filter)
+#      - grouping of fields into sections (fieldsets)
+#     """
+#     list_display = ('book', 'status', 'borrower', 'due_back', 'id')
+#     list_filter = ('status', 'due_back')
+#
+#     fieldsets = (
+#         (None, {
+#             'fields': ('book', 'imprint', 'id')
+#         }),
+#         ('Availability', {
+#             'fields': ('status', 'due_back', 'borrower')
+#         }),
+#     )
+class EmployeeInline(admin.TabularInline):
     """
-    Administration object for BookInstance models. 
+    Defines format of inline book insertion (used in AuthorAdmin)
+    """
+    model = Employee
+
+#
+# @admin.register(Author)
+# class AuthorAdmin(admin.ModelAdmin):
+#     """
+#     Administration object for Author models.
+#     Defines:
+#      - fields to be displayed in list view (list_display)
+#      - orders fields in detail view (fields), grouping the date fields horizontally
+#      - adds inline addition of books in author view (inlines)
+#     """
+#     list_display = ('job_title','last_name', 'first_name', 'date_of_birth')
+#     fields = ['job_title','first_name', 'last_name', ('date_of_birth',)]
+#     inlines = [EmployeeInline]
+
+
+class SalaryInstanceInline(admin.TabularInline):
+    """
+    Defines format of inline book instance insertion (used in BookAdmin)
+    """
+    model = SalaryInstance
+
+
+class EmployeeAdmin(admin.ModelAdmin):
+    """
+    Administration object for Book models.
+    Defines:
+     - fields to be displayed in list view (list_display)
+     - adds inline addition of book instances in book view (inlines)
+    """
+    list_display = ('job_title', 'first_name', 'last_name')
+    inlines = [SalaryInstanceInline]
+
+
+admin.site.register(Employee, EmployeeAdmin)
+
+
+@admin.register(SalaryInstance)
+class SalaryInstanceAdmin(admin.ModelAdmin):
+    """
+    Administration object for BookInstance models.
     Defines:
      - fields to be displayed in list view (list_display)
      - filters that will be displayed in sidebar (list_filter)
      - grouping of fields into sections (fieldsets)
     """
-    list_display = ('book', 'status', 'borrower', 'due_back', 'id')
-    list_filter = ('status', 'due_back')
+    list_display = ('field', 'status', 'employee', 'sdate', 'id')
+    list_filter = ('status', 'sdate')
 
     fieldsets = (
         (None, {
-            'fields': ('book', 'imprint', 'id')
+            'fields': ('field', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back', 'borrower')
+            'fields': ('status', 'sdate', 'employee')
         }),
     )
