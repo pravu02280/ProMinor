@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{% block title %}<title>Local Library</title>{% endblock %}
+{% block title %}<title>EmployeeManagement System</title>{% endblock %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/shards.min.css">
@@ -16,7 +16,6 @@
 body {
   background: radial-gradient(linear, black, white);
 }
-
 
 </style>
 </head>
@@ -51,6 +50,7 @@ body {
                 <li><a href="{% url 'all-borrowed' %}">All borrowed</a></li>
                 <li><a href="{% url 'leaveformview' %}">leaveformview</a></li>
                 <li><a href="{% url 'progressformview' %}">progressformview</a></li>
+                <li><a href="{% url 'attendenceformview' %}">attendenceformview</a></li>
                 {% endif %}
             </ul>
             {% endif %}
