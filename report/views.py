@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.shortcuts import render
 from django.http import HttpResponse
-
 # Create your views here.
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
@@ -24,7 +23,7 @@ def leaveformview(request):
             leave = form.save(commit=False)
             leave.user = request.user
             leave.save()
-            return HttpResponseRedirect('/report/leaveform/')
+            return render(request, 'name.html', {'form': LeaveForm(), 'message': 'Submitted Successfully'})
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -46,7 +45,7 @@ def progressformview(request):
             progress = form.save(commit=False)
             progress.user = request.user
             progress.save()
-            return HttpResponseRedirect('/report/progressview/')
+            return render(request, 'nameone.html', {'form': ProgressForm(), 'message': 'Submitted Successfully'})
 
     # if a GET (or any other method) we'll create a blank form
     else:

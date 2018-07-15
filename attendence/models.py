@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Attendence(models.Model):
-    date = models.DateField(null=True, blank=True)
+    date = models.DateField(null=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE)
     approve = models.BooleanField(default=False)

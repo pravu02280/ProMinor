@@ -24,15 +24,18 @@ helped us to completing the project.
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="download.jpg" alt="Los Angeles">
+            <img src="{% static 'images/download.jpg' %}" style="height:400px">
         </div>
 
         <div class="item">
-            <img src="download2.jpg" alt="Chicago">
+            <img src="{% static 'images/download1.jpg' %}" style="height:400px">
         </div>
 
         <div class="item">
-            <img src="download3.jpg" alt="New York">
+            <img src="{% static 'images/download2.jpg' %}" style="height:400px">
+        </div>
+        <div class="item">
+            <img src="{% static 'images/blue.jpg' %}" style="height:400px">
         </div>
     </div>
 
@@ -47,15 +50,7 @@ helped us to completing the project.
     </a>
 </div>
 
-<h2>Dynamic content</h2>
 
-<p>The library has the following record counts:</p>
-<ul>
-    <li><strong>Books:</strong> {{ num_books }}</li>
-    <li><strong>Copies:</strong> {{ num_instances }}</li>
-    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
-    <li><strong>Authors:</strong> {{ num_authors }}</li>
-</ul>
 
 
 You have visited this page {{ num_visits }} times.

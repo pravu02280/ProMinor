@@ -30,4 +30,4 @@ def attendenceformview(request, format=None):
     else:
         form = AttendenceForm()
 
-    return render(request, 'name.html', {'form': form})
+    return render(request, 'name1.html', {'form': form})
