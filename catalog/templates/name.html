@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <style type="text/css">
+<style type="text/css">
 .form-style-6{
     font: 95% Arial, Helvetica, sans-serif;
     max-width: 400px;
@@ -79,12 +79,14 @@
 .form-style-6 input[type="button"]:hover{
     background: #2EBC99;
 }
+
+
 </style>
-    {% if message %}
-        <div class="alert alert-success">
-            <strong>{{ message }}</strong>
-        </div>
-    {% endif %}
+{% if message %}
+<div class="alert alert-success">
+    <strong>{{ message }}</strong>
+</div>
+{% endif %}
 <div class="container">
     <h1>Leave Form</h1>
     <div class="container">
@@ -94,7 +96,8 @@
                 {% csrf_token %}
                 Subject: {{ form.subject }}
                 Description: {{ form.description }}
-                <input type="submit" value="Submit" />
+                leavedate: {{form.leavedate}}
+                <input type="submit" value="Submit"/>
             </form>
         </div>
     </div>

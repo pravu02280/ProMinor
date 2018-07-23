@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 from django.urls import reverse
 
+
 # Create your models here.
 class RLeave(models.Model):
     subject = models.CharField(
         max_length=200, help_text="Enter a leave form")
+    leavedate = models.DateField(null=True, blank=True)
     description = models.CharField(
         max_length=200)
     user = models.ForeignKey(

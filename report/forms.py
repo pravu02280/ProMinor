@@ -9,7 +9,7 @@ from .models import RLeave, RProgress
 class LeaveForm(forms.ModelForm):
     class Meta:
         model = RLeave
-        fields = ['subject', 'description']
+        fields = ['subject', 'description', 'leavedate']
 
 
 class ProgressForm(forms.ModelForm):
