@@ -7,9 +7,14 @@ from .models import RLeave, RProgress
 
 
 class LeaveForm(forms.ModelForm):
+    leavedate = forms.DateField(
+    widget=forms.SelectDateWidget(
+        empty_label=("Choose Year", "Choose Month", "Choose Day"),
+    ),
+)
     class Meta:
         model = RLeave
-        fields = ['subject', 'description', 'leavedate']
+        fields = ['leavedate', 'subject', 'description']
 
 
 class ProgressForm(forms.ModelForm):

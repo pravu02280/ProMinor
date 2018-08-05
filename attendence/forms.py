@@ -7,6 +7,15 @@ from .models import Attendence
 
 
 class AttendenceForm(forms.ModelForm):
+    date = forms.DateField(
+    widget=forms.SelectDateWidget(
+        empty_label=("Choose Year", "Choose Month", "Choose Day"),
+        years=((datetime.datetime.now().year,)),
+        months=({1: datetime.datetime.now().strftime("%B")}),
+        
+    ),
+    initial=datetime.date.today
+)
     class Meta:
         model = Attendence
-        fields = ['date', 'user']
+        fields = ['date']
