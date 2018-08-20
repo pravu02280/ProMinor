@@ -18,8 +18,6 @@
   }
 
   body {
-    background: #2c2b2b !important;
-    color: antiquewhite !important;
   }
 
   /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
@@ -68,14 +66,9 @@
     <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
     <script>
   $(function () {
-    $(".preload").fadeOut(6000, function () {
-      $(".content").fadeIn(1000);
+    $(".preload").fadeOut(6, function () {
+      $(".content").fadeIn(1);
     });
   });
-
-
-
-
-
     </script>
     {% endblock %}

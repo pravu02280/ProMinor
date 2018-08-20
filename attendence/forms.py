@@ -6,15 +6,19 @@ from django import forms
 from .models import Attendence
 
 
+def get_months():
+    month = datetime.datetime.now()
+    return {month.strftime("%m"): month.strftime("%B")}
+
+
 class AttendenceForm(forms.ModelForm):
     date = forms.DateField(
     widget=forms.SelectDateWidget(
         empty_label=("Choose Year", "Choose Month", "Choose Day"),
         years=((datetime.datetime.now().year,)),
-        months=({1: datetime.datetime.now().strftime("%B")}),
-        
+        months=(get_months()),
     ),
-    initial=datetime.date.today
+    initial=datetime.date.today,
 )
     class Meta:
         model = Attendence

@@ -1,3 +1,6 @@
+import datetime
+import calendar
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -11,6 +14,7 @@ from django.contrib.auth.decorators import permission_required
 from .forms import RenewBookForm
 
 from .models import Book, Author, BookInstance, Genre
+from attendence.models import Attendence
 
 
 def index(request):
@@ -35,8 +39,11 @@ def index(request):
         'index.html',
         context={'num_books': num_books, 'num_instances': num_instances,
                  'num_instances_available': num_instances_available, 'num_authors': num_authors,
-                 'num_visits': num_visits},
+                 'num_visits': num_visits,
+                 },
     )
+
+
 
 
 from django.views import generic
